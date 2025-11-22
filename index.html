@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>
+</head>
+<body>
+    <main>
+        <h1>Write in Markdown:</h1>
+        <textarea id="inputText" rows="25" cols="50" placeholder="Enter markdown here"></textarea><br>
+        <button onclick="renderText()">Convert</button><br>
+        <button onclick="resetTextArea()">Reset</button>
+        <h1>Preview:</h1>
+        <div id="renderedText">
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
