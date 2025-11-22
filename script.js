@@ -1,12 +1,22 @@
 (
     function (){
-        const convertButton = document.getElementById('convertBtn');
+        // Utility function to call render everytime user inputs text
+        function debounce(func, delay) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
         const resetButton = document.getElementById('resetBtn');
         const textArea = document.getElementById('inputText');
         const renderedText = document.getElementById('renderedText');
 
-        convertButton.addEventListener('click', renderText);
         resetButton.addEventListener('click', resetTextArea);
+
+        const debouncedRender = debounce(renderText, 300);
+        textArea.addEventListener('input', debouncedRender);
 
         // Focus on text area as soon as page is loaded.
         textArea.focus();
@@ -82,7 +92,11 @@
         // Function to reset text area value.
         function resetTextArea() {
             textArea.value = "";
+            renderText();
             textArea.focus();
         };
 
-})();
+        // In case there are any previous garbage values.
+        renderText();
+    }
+)();
