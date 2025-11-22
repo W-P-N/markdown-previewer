@@ -52,18 +52,16 @@
 
         // Function to check heading start and assigning appropriate headings.
         function checkHeadings(line) {
-            let outputText = "";
             if(line.startsWith('###')) {
-                outputText += `<h3>${line.slice(3)}</h3>\n`;
+                return `<h3>${line.slice(3)}</h3>`;
             } else if(line.startsWith('##')) {
-                outputText += `<h2>${line.slice(2)}</h2>\n`;
+                return `<h2>${line.slice(2)}</h2>`;
             } else if(line.startsWith('#')) {
-                outputText += `<h1>${line.slice(1)}</h1>\n`;
+                return `<h1>${line.slice(1)}</h1>`;
             } else {
-                outputText += `<p>${line}</p>\n`;
+                return `<p>${line}</p>`;
             };
-            return outputText;
-        }
+        };
 
         // Function to reset text area value.
         function resetTextArea() {
