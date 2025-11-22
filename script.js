@@ -1,5 +1,9 @@
 (
     function (){
+        const resetButton = document.getElementById('resetBtn');
+        const textArea = document.getElementById('inputText');
+        const renderedText = document.getElementById('renderedText');
+        
         // Utility function to call render everytime user inputs text
         function debounce(func, delay) {
             let timeout;
@@ -8,10 +12,6 @@
                 timeout = setTimeout(() => func.apply(this, args), delay);
             };
         };
-
-        const resetButton = document.getElementById('resetBtn');
-        const textArea = document.getElementById('inputText');
-        const renderedText = document.getElementById('renderedText');
 
         resetButton.addEventListener('click', resetTextArea);
 
