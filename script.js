@@ -2,17 +2,17 @@
     function (){
         const convertButton = document.getElementById('convertBtn');
         const resetButton = document.getElementById('resetBtn');
+        const textArea = document.getElementById('inputText');
+        const renderText = document.getElementById('renderedText');
 
-        convertButton.addEventListener('onclick', renderText);
-        resetButton.addEventListener('onclick', resetTextArea);
+        convertButton.addEventListener('click', renderText);
+        resetButton.addEventListener('click', resetTextArea);
 
         // Focus on text area as soon as page is loaded.
         textArea.focus();
 
         // Function renders the markdown text.
         function renderText() {
-            // Get the text area
-            const textArea = document.getElementById('inputText');
             // Get the value of the input text.
             const inputText = textArea.value;
             // Split on new line and create lines array.
@@ -23,8 +23,14 @@
                 return checkLinks(checkItalic(checkBold(checkHeadings(line))));
             });
 
-            // Get the space where the text is to be rendered
-            const renderText = document.getElementById('renderedText');
+            const escapeHtml = (unsafe) => {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "$gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            };
             // Join the markdown array on new line.
             renderText.innerHTML = mdArray.join('\n');
         };
