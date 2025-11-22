@@ -3,7 +3,7 @@
         const convertButton = document.getElementById('convertBtn');
         const resetButton = document.getElementById('resetBtn');
         const textArea = document.getElementById('inputText');
-        const renderText = document.getElementById('renderedText');
+        const renderedText = document.getElementById('renderedText');
 
         convertButton.addEventListener('click', renderText);
         resetButton.addEventListener('click', resetTextArea);
@@ -13,16 +13,7 @@
 
         // Function renders the markdown text.
         function renderText() {
-            // Get the value of the input text.
-            const inputText = textArea.value;
-            // Split on new line and create lines array.
-            const linesArray = inputText.split('\n');
-            // Create converted markdown array
-            const mdArray = linesArray.map((line, idx) => {
-                // Check sequence - Headings, Bold, Italic, Links
-                return checkLinks(checkItalic(checkBold(checkHeadings(line))));
-            });
-
+            // Temp function to check for escape chars.
             const escapeHtml = (unsafe) => {
                 return unsafe
                     .replace(/&/g, "&amp;")
@@ -31,8 +22,33 @@
                     .replace(/"/g, "&quot;")
                     .replace(/'/g, "&#039;");
             };
+            // Get the value of the input text.
+            const inputText = textArea.value;
+            // Split on new line and create lines array.
+            const linesArray = inputText.split('\n');
+            // Create converted markdown array
+            const mdArray = linesArray.map((line, idx) => {
+                // Logic error: Problem with previous version: Heading will wrap text aroung heading tags, thus might remove bold or italic marks.
+                // Check escape sequence -> links -> bold -> italic
+                let processedLine = escapeHtml(line);
+                processedLine = checkLinks(processedLine);
+                processedLine = checkBold(processedLine);
+                processedLine = checkItalic(processedLine);
+                // Check for headings
+                if(processedLine.startsWith('#')) {
+                    if(processedLine.startsWith('###')) {
+                        return `<h3>${processedLine.slice(3)}</h3>`;
+                    } else if(processedLine.startsWith('##')) {
+                        return `<h2>${processedLine.slice(2)}</h2>`;
+                    } else if(processedLine.startsWith('#')) {
+                        return `<h1>${processedLine.slice(1)}</h1>`;
+                    };
+                } else {
+                    return `<p>${processedLine}</p>`;
+                };
+            });
             // Join the markdown array on new line.
-            renderText.innerHTML = mdArray.join('\n');
+            renderedText.innerHTML = mdArray.join('');
         };
 
         // Function to replace links with <a> tag using regex.
