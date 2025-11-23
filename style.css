@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    margin: 0;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #313131;
+    color: #EEEEEE;
+}
+
+main {
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+#inputText, #renderedText {
+    height: 70vh;
+    box-sizing: border-box;
+    width: 40vw;
+    padding: 8px;
+    background-color: #EEEEEE;
+    color: #313131;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+}
+
+#renderedText {
+    border: 2px solid black;
+    padding: 0 8px;
+    overflow: auto;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+}
+
+#resetBtn {
+    width: 100%;
+    height: 30px;
+    padding: auto;
+    color: #EEEEEE;
+    background-color: #CA3E47;
+    justify-content: center;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
