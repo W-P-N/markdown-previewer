@@ -76,19 +76,6 @@
             return line.replace(/\*(.*?)\*/g, '<em>$1</em>');
         };
 
-        // Function to check heading start and assigning appropriate headings.
-        function checkHeadings(line) {
-            if(line.startsWith('###')) {
-                return `<h3>${line.slice(3)}</h3>`;
-            } else if(line.startsWith('##')) {
-                return `<h2>${line.slice(2)}</h2>`;
-            } else if(line.startsWith('#')) {
-                return `<h1>${line.slice(1)}</h1>`;
-            } else {
-                return `<p>${line}</p>`;
-            };
-        };
-
         // Function to reset text area value.
         function resetTextArea() {
             textArea.value = "";
